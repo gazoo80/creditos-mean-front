@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+    height: 100%;
+}
+.wrapper {
+    background-color: #f5f5f8;;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    height: 130px;
+    margin-bottom: 10px;
+}
+
+.body {
+    max-width: 380px;
+    width: 100%;
+    padding: 20px 20px;
+    border-radius: 10px;
+    border: 1px solid #273b7a;
+    border-top-color: rgba(39, 59, 122, 100%);
+    border-top-width: 8px;
+}
