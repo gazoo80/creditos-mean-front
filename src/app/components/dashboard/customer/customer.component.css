@@ -1,0 +1,38 @@
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.btn-edit, .btn-delete {
+  cursor: pointer;
+}
+
+.btn-delete {
+  color: #B0304B;
+}
+
+.btn-edit {
+  color: #4B7BCD;
+}
+
+.title-card {
+  background-color: #d4d1d1a1; /*#d1cbcb*/
+  border-radius: 7px;
+  color: #3f51b5
+}
+
+.btn-add {
+  background-color: #3f51b5;
+}
+
+.checked {
+  color: orange;
+}
+
+.no-checked {
+  color: gray;
+}

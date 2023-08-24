@@ -1,0 +1,138 @@
+<h2 mat-dialog-title class="title-modal py-2 ps-3">
+    <i class="bi bi-person-vcard"></i>
+    {{ operation }} Cliente
+</h2>
+
+<mat-progress-bar *ngIf="loading" mode="indeterminate" class="mb-3"></mat-progress-bar>
+
+<form [formGroup]="form" (ngSubmit)="addEditCustomer()">
+    <mat-dialog-content >
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <div class="row">
+                    <div class="col-12 col-sm-6 pe-sm-1">
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput placeholder="" autocomplete="off" formControlName="firstName" maxlength="20">
+                        </mat-form-field>
+                        <mat-error class="error" *ngIf="form.get('firstName')?.hasError('required') && form.get('firstName')?.touched">
+                            El campo es requerido
+                        </mat-error>
+                        <!-- <mat-error class="error" *ngIf="form.get('firstName')?.hasError('maxlength')">
+                            El max. es 20 caracteres
+                        </mat-error> -->
+                        <!-- <div class="error">
+                            <span>
+                                El nombre es requerido
+                            </span>
+                        </div> -->
+                    </div>
+                    <div class="col-12 col-sm-6 ps-sm-1">
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Apellido</mat-label>
+                            <input matInput placeholder="" autocomplete="off" formControlName="lastName" maxlength="20">
+                        </mat-form-field>
+                        <mat-error class="error" *ngIf="form.get('lastName')?.hasError('required') && form.get('lastName')?.touched">
+                            El campo es requerido
+                        </mat-error>
+                    </div>
+                    <div class="col-12 col-sm-6 pe-sm-1">
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Correo</mat-label>
+                            <input matInput placeholder="" autocomplete="off" formControlName="email"  maxlength="50">
+                        </mat-form-field>
+                        <mat-error class="error" *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched">
+                            El campo es requerido
+                        </mat-error>
+                        <mat-error class="error" *ngIf="form.get('email')?.hasError('email')">
+                            El email es inválido
+                        </mat-error>
+                    </div>
+                    <div class="col-12 col-sm-6 ps-sm-1">
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Teléfono</mat-label>
+                            <input matInput placeholder="" autocomplete="off" formControlName="telephone" maxlength="11">
+                        </mat-form-field>
+                        <mat-error class="error" *ngIf="form.get('telephone')?.hasError('required') && form.get('telephone')?.touched">
+                            El campo es requerido
+                        </mat-error>
+                        <mat-error class="error" *ngIf="form.get('telephone')?.hasError('pattern')">
+                            El campo es sólo numérico
+                        </mat-error>
+                    </div>
+                    <div class="col-12 col-sm-6 pe-sm-1">
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Tipo de Documento</mat-label>
+                            <mat-select formControlName="idCardType">
+                                <mat-option *ngFor="let type of idCardTypes" [value]="type">
+                                  {{type}}
+                                </mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                        <mat-error class="error" *ngIf="form.get('idCardType')?.hasError('required') && form.get('idCardType')?.touched">
+                            El campo es requerido
+                        </mat-error>
+                    </div>
+                    <div class="col-12 col-sm-6 ps-sm-1">
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Nro. de  Documento</mat-label>
+                            <input matInput placeholder="" autocomplete="off" formControlName="idCardNumber" maxlength="10">
+                        </mat-form-field>
+                        <mat-error class="error" *ngIf="form.get('idCardNumber')?.hasError('required') && form.get('idCardNumber')?.touched">
+                            El campo es requerido
+                        </mat-error>
+                        <mat-error class="error" *ngIf="form.get('idCardNumber')?.hasError('pattern')">
+                            El campo es sólo numérico
+                        </mat-error>
+                    </div>
+                    <div class="col-12 col-sm-6 pe-sm-1">
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Fecha de Nacimiento</mat-label>
+                            <input [max]="maxDate" matInput [matDatepicker]="picker" formControlName="dateOfBirth" readonly="true">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker touchUi #picker></mat-datepicker>
+                        </mat-form-field>
+                        <mat-error class="error" *ngIf="form.get('dateOfBirth')?.hasError('required') && form.get('dateOfBirth')?.touched">
+                            El campo es requerido
+                        </mat-error>
+                    </div>
+                    <div class="col-12 col-sm-6 ps-sm-1 d-flex flex-column">
+                        <!-- <mat-form-field appearance="fill" class="w-100"> -->
+                        <mat-label class="ps-2 pt-0 pt-sm-1">Calificación del cliente</mat-label>
+                        <div class="ps-1 mt-1">
+                            <mat-icon class="fs-3" *ngFor="let i of maxRatingArr; let index = index"
+                                (mouseenter)="handleMouseEnter(index)"
+                                (mouseleave)="handleMouseLeave()"
+                                [ngClass]="{checked: selectedRating > index}"
+                                (click)="rate(index)">
+                                star rate
+                            </mat-icon>
+                        </div>
+                            
+                            <!-- <input matInput placeholder="" autocomplete="off"> -->
+                        <!-- </mat-form-field> -->
+                    </div>
+                    <div class="col-12 mt-1 mt-sm-0">
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Dirección</mat-label>
+                            <input matInput placeholder="" autocomplete="off" formControlName="address" maxlength="100">
+                        </mat-form-field>
+                        <mat-error class="error" *ngIf="form.get('address')?.hasError('required') && form.get('address')?.touched">
+                            El campo es requerido
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 mt-2 mt-lg-0">
+                <app-map (onSelectedCoordinate)="selectedCoordinate($event)"
+                         [initialCoordinates]="initialCoordinate"></app-map>
+            </div>
+        </div>  
+    </mat-dialog-content>
+ 
+    <mat-dialog-actions align="end" class="pt-0 pb-1 me-3 me-lg-0 d-flex align-items-lg-start">
+        <button type="button" mat-button (click)="cancel()">Cancelar</button>
+        <button type="submit" mat-button cdkFocusInitial class="btn-aceptar">Aceptar</button>
+    </mat-dialog-actions>
+</form>
+

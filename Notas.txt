@@ -4,6 +4,12 @@ https://www.flaticon.es/
 https://icons.getbootstrap.com/?q=sign
 https://www.npmjs.com/package/ngx-toastr
 
+https://material.angular.io/
+https://v14.material.angular.io/guide/getting-started
+https://fonts.google.com/icons
+https://www.ultimateakash.com/blog-details/Ii1DQGAKYAo=/How-To-Integrate-Leaflet-Maps-in-Angular-2022
+https://github.com/bluehalo/ngx-leaflet
+
 ==================================================================================================
 
 Seccion 01: Creando la aplicacion Fromtend e instalando bootstrap
@@ -193,6 +199,57 @@ respectivo modulo. Además del routing y el modulo de dashboard.
 Retire la declaracion de navbar y dashboard de app.module y la coloque en dashboard.module
 Ahora todo el contenido de dashboard se carga con lazy load, es decir solo recien cuando
 carga el modulo dashboard. Ver app-routing
+
+Seccion 01: Configurandion y uso de Angular Material 
+    
+    https://material.angular.io/
+    https://v14.material.angular.io/guide/getting-started
+
+    A. Ejecutar:
+       ng add @angular/material@14.2.0
+       Procurar tener en cuenta la version de Angular que se este usando 
+       
+    B. Elegimos el tema Deep Purple/Amber
+    
+    C. Decimos que Si a la tipografia de Angualr Material
+
+    D. Incluimos y habilitamos las animaciones
+
+==============================================================================================
+
+Seccion 02: Modal
+
+Configuracion del modal en:
+
+Componentes Customer (ts) y Upsert (ts y html)
+
+==============================================================================================
+
+Seccion 03: Formulario Reactivo
+
+import { ReactiveFormsModule } from '@angular/forms';
+
+==============================================================================================
+
+Seccion 04: Validaciones en el Formulario
+
+==============================================================================================
+
+Seccion 05: Configuracion del backend
+
+* En el otro proyecto (backend)
+
+==============================================================================================
+
+Seccion 08: Creacion de servicios para integrar con el backend
+
+==============================================================================================
+
+Seccion 09:  Actualizacion de Customer
+
+
+
+
 
 
 

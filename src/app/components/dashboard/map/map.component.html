@@ -1,0 +1,7 @@
+<p class="mb-0 small fw-bold border-1 border-secondary border-top">Ubicación del domicilio</p>
+<div *ngIf="options" style="height: 314px"
+    leaflet [leafletOptions]="options"
+    (leafletDoubleClick)="handleClick($event)"
+    [leafletLayers]="layers">
+</div>
+

@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   server: "http://localhost:3001/"
+  //server: "https://creditos-mean-api-production.up.railway.app/"
 };
 
 /*

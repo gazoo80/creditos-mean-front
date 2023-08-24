@@ -1,9 +1,27 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <h2 class="navbar-brand fs-3" href="#">CRUD  Clientes</h2>
-        <button class="btn btn-danger" type="button" (click)="logout()">
-            Salir
+<nav class="navbar navbar-expand-lg navbar-dark bg-navbar">
+    <div class="container-fluid py-2 d-flex align-items-center">
+        <!-- <h2 class="navbar-brand fs-2 mb-0" href="#">
+            <i class="bi bi-coin fs-1"></i>
+            H&Z Créditos
+        </h2>
+        <button class="btn btn-danger" title="Salir" type="button" (click)="logout()">
+            <span class="d-none d-sm-inline">Salir</span> 
             <i class="bi bi-box-arrow-right ms-1 fs-6"></i>
+        </button> -->
+        <h2 class="navbar-brand fs-2 mb-1" href="#">
+            <i class="bi bi-coin fs-1"></i>
+            H&Z Créditos
+        </h2>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <div class="me-auto"></div>
+            <div class="text-white fs-4 me-3 mt-2 mt-lg-0">Hola, {{ userService.getClaimJWT("username") }}</div>
+            <button class="btn btn-danger mt-3 mt-lg-0" title="Salir" type="button" (click)="logout()">
+                <span>Salir</span> 
+                <i class="bi bi-box-arrow-right ms-1 fs-6"></i>
+            </button>
+        </div>
     </div>
-  </nav>
+</nav>

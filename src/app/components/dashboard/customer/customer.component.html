@@ -1,1 +1,76 @@
-<p>customer works!</p>
+
+<mat-card class="mt-4">
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    <mat-card-title class="fs-2 mb-3 py-3 text-start ps-4 title-card">
+        <!-- <mat-icon class="fs-3">group</mat-icon> -->
+        <i class="bi bi-people-fill"></i>
+        Clientes
+    </mat-card-title>
+    <div class="d-flex flex-column flex-sm-row mb-2 mb-sm-0">
+        <mat-form-field appearance="standard">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" #input autocomplete="off">
+        </mat-form-field>
+        <div class="d-flex align-items-center justify-content-end ms-sm-4">
+            <button mat-raised-button (click)="addEditCustomer()" title="Agregar" class="text-white btn-add">
+                <mat-icon>add_circle</mat-icon>
+                Agregar
+            </button>
+        </div>
+    </div>
+    <div class="mat-elevation-z8">
+        <table mat-table matSort [dataSource]="dataSource" >
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+          
+            <!-- Position Column -->
+            <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="fw-bold fs-6"> Nombre </th>
+                <td mat-cell *matCellDef="let element"> {{element.firstName}} {{element.lastName}}</td>
+            </ng-container>
+            <ng-container matColumnDef="rating">
+                <th mat-header-cell *matHeaderCellDef class="fw-bold fs-6 d-none d-md-table-cell"> Calificación </th>
+                <td mat-cell class="d-none d-md-table-cell" *matCellDef="let element"> 
+                    <mat-icon class="fs-4" style="margin-left: -2px;" *ngFor="let i of [0, 0, 0, 0, 0]; let index = index"
+                        [ngClass]="element.rating > index ? 'checked' : 'no-checked'">
+                            star rate
+                    </mat-icon>
+                </td>
+            </ng-container> 
+            <ng-container matColumnDef="telephone">
+                <th mat-header-cell *matHeaderCellDef class="fw-bold fs-6 d-none d-sm-table-cell"> Teléfono </th>
+                <td mat-cell class="d-none d-sm-table-cell" *matCellDef="let element"> {{element.telephone}}</td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef class="fw-bold fs-6 d-none d-sm-table-cell"> Correo </th>
+                <td mat-cell class="d-none d-sm-table-cell" *matCellDef="let element"> {{element.email}}</td>
+            </ng-container>
+            <ng-container matColumnDef="idCardType">
+                <th mat-header-cell *matHeaderCellDef class="fw-bold fs-6 d-none d-lg-table-cell"> Tipo Doc. </th>
+                <td mat-cell class="d-none d-lg-table-cell" *matCellDef="let element"> {{element.idCardType}}</td>
+            </ng-container>
+            <ng-container matColumnDef="idCardNumber">
+                <th mat-header-cell *matHeaderCellDef class="fw-bold fs-6 d-none d-lg-table-cell"> Número Doc. </th>
+                <td mat-cell class="d-none d-lg-table-cell" *matCellDef="let element"> {{element.idCardNumber}}</td>
+            </ng-container>
+            
+            <!-- <ng-container matColumnDef="dateOfBirth"> 
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="fw-bold fs-6 d-none d-md-table-cell"> Fecha de Nac. </th>
+                <td mat-cell class="d-none d-md-table-cell" *matCellDef="let element"> {{element.dateOfBirth | date: "dd/MM/yyyy" }}</td>
+            </ng-container> -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef class="fw-bold fs-6"> Acciones </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <mat-icon (click)="addEditCustomer(element.id)" class="btn-edit" matTooltip="Editar">edit</mat-icon>
+                    <mat-icon (click)="deleteCustomer(element.id)" class="btn-delete" matTooltip="Eliminar">delete</mat-icon>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
+</mat-card>

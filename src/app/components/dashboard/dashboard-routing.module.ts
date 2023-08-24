@@ -7,9 +7,9 @@ const routes: Routes = [
   { path: '', component: DashboardComponent, children: [
     // Con la ruta primaria de dashboard cargara por defecto el componente Customer
     { path: '', component: CustomerComponent },
-    { path: 'customer', component: CustomerComponent },
+    { path: 'customers', component: CustomerComponent },
     // Si despues de dashboard/ ponemos algo que no existe dedirigira a Customer
-    { path: '**', redirectTo: "customer" }
+    { path: '**', redirectTo: "customers" }
   ]}
 ];
 
