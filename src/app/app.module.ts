@@ -11,9 +11,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
-//import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
-//import { NavbarComponent } from './components/dashboard/navbar/navbar.component';
 import { AddTokenInterceptor } from './utils/add-token.interceptor';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 
@@ -23,9 +21,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     AppComponent,
     LoginComponent,
     SignInComponent,
-    //DashboardComponent,
-    SpinnerComponent,
-    //NavbarComponent
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -33,18 +29,17 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     AppRoutingModule,
     HttpClientModule,
     LeafletModule,
-    FormsModule, // Para que funcione ngModel
-    BrowserAnimationsModule, // required animations module
+    FormsModule,
+    BrowserAnimationsModule,
     ToastrModule.forRoot({ 
       timeOut: 3000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
       progressAnimation: "decreasing"
-    }), // ToastrModule added con configuraciones globales
+    }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true },
-    // Para que el calendario se muestre en español (dd/MM/yyyy)
     { provide: MAT_DATE_LOCALE, useValue: "es" }
   ],
   bootstrap: [AppComponent]

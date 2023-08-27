@@ -49,13 +49,12 @@ export class CustomerComponent implements OnInit, AfterViewInit {
   addEditCustomer(id: number = 0): void {
     const dialogRef = this.dialog.open(UpsertCustomerComponent, {
       width: '1000px',
-      disableClose: true, // Para que no cierre al hacer click fuera del modal
-      data: { id: id } // Pasamos un objeto con el id del customer al modal
+      disableClose: true,
+      data: { id: id }
     });
 
-    // HAcer algo al cerrar el modal
     dialogRef.afterClosed().subscribe(result => {
-      if (result) { // Solo cuando se haga click en Aceptar en el modal
+      if (result) { 
         this.getCustomers();
       }
     });
@@ -67,18 +66,16 @@ export class CustomerComponent implements OnInit, AfterViewInit {
     this.customerService.getCustomers().subscribe({
       next: (customers: any) => {
         this.loading = false;
-        // Asignamos la data para la tabla
         this.dataSource.data = customers;
-        // Reconfiguramos la paginacion y el orden
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },
       error: (e: HttpErrorResponse) => {
         this.loading = false;
         this.toastr.error(
-          e.error.msg ?? "¡Ups, ocurrió un error inesperado. Inténtelo más tarde! ", 
+          e.error.msg ?? "¡Ups, ocurrió un error. Inténtelo más tarde! ", 
           "Error"
-        ); // msg tiene que existir en el json respuesta sino mostramos uno personalizado
+        );
       }
     });
   }
@@ -94,7 +91,6 @@ export class CustomerComponent implements OnInit, AfterViewInit {
       confirmButtonText: 'Sí, bórralo!'
     }).then((result) => {
         if (result.isConfirmed) { 
-          console.log(id);
           this.loading = true;
 
           this.customerService.deleteCustomer(id).subscribe({
@@ -108,7 +104,7 @@ export class CustomerComponent implements OnInit, AfterViewInit {
             error: (e: HttpErrorResponse) => {
               this.loading = false;
               this.toastr.error(
-                e.error.msg ?? "¡Ups, ocurrió un error inesperado. Inténtelo más tarde! ", 
+                e.error.msg ?? "¡Ups, ocurrió un error. Inténtelo más tarde! ", 
                 "Error"
               );
             }

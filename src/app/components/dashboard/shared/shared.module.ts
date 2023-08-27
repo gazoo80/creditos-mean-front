@@ -36,9 +36,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatButtonModule,
     MatDialogModule,
     MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule, // Tambien para el datePicker Calendar
-    ReactiveFormsModule, // Para manejar formularios reativos
+    MatDatepickerModule, // datePicker Calendar
+    MatNativeDateModule, // datePicker Calendar
+    ReactiveFormsModule,
     MatProgressBarModule,
     MatProgressSpinnerModule
   ],

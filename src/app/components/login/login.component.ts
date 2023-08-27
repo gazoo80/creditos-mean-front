@@ -24,13 +24,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    // Validando que el usuasrio ingrese valores
     if (this.username == "" || this.password == "") {
       this.toastr.error('Todos los campos son requeridos', 'Error');
       return;
     }
 
-    // Creamos el objeto user que vamos a loguear
     const user: User = {
       username: this.username,
       password: this.password
@@ -49,7 +47,7 @@ export class LoginComponent implements OnInit {
         this.toastr.error(
           e.error.msg ?? "¡Ups, ocurrió un error inesperado. Inténtelo más tarde! ", 
           "Error"
-        ); // msg tiene que existir en el json respuesta sino mostramos uno personalizado
+        );
         this.username = "";
         this.password = "";
       }

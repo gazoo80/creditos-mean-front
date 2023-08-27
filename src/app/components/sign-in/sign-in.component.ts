@@ -19,25 +19,22 @@ export class SignInComponent implements OnInit {
 
   constructor(private toastr: ToastrService,
               private userService: UserService,
-              private router: Router) { } // para navegacion entre paginas
+              private router: Router) { } 
 
   ngOnInit(): void {
   }
 
   addUser() {
-    // Validando que el usuasrio ingrese valores
     if (this.username == "" || this.password == "" || this.password == "") {
       this.toastr.error('Todos los campos son requeridos', 'Error');
       return;
     }
 
-    // Valdamos que los password sean iguales
     if (this.password !== this.confirmPassword) {
       this.toastr.error('Los passwords ingresados deben ser iguales', 'Error');
       return;
     }
 
-    // Creamos el objeto user que vamos a registrar
     const user: User = {
       username: this.username,
       password: this.password
@@ -56,7 +53,7 @@ export class SignInComponent implements OnInit {
         this.toastr.error(
           e.error.msg ?? "¡Ups, ocurrió un error inesperado. Inténtelo más tarde! ", 
           "Error"
-        ); // msg tiene que existir en el json respuesta sino mostramos uno personalizado
+        ); 
         this.username = "";
         this.password = "";
         this.confirmPassword = "";

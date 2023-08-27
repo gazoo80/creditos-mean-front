@@ -32,16 +32,16 @@ export class UpsertCustomerComponent implements OnInit {
 
   loading: boolean = false;
   operation: string = "Agregar ";
-  idCustomer: number; // Id enviado por el componente que abre el modal
+  idCustomer: number; 
   
   constructor(public dialogRef: MatDialogRef<UpsertCustomerComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, // Para recibir data del componente padre (el q abre el modal) 
+              @Inject(MAT_DIALOG_DATA) public data: any, 
               private fb: FormBuilder,
               private customerService: CustomerService,
               private toastr: ToastrService) { 
     
-    this.maxDate = new Date(); // Para el calendario
-    this.idCustomer = data.id; //id pasado al modal en data
+    this.maxDate = new Date(); // Condicion para el calendario
+    this.idCustomer = data.id; 
 
     this.form = this.fb.group({
       firstName: ["", [
@@ -68,7 +68,7 @@ export class UpsertCustomerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.maxRatingArr = Array(this.maxRating).fill(0); // RAting
+    this.maxRatingArr = Array(this.maxRating).fill(0);
     this.isEdit(this.idCustomer);
   }
 
@@ -102,9 +102,7 @@ export class UpsertCustomerComponent implements OnInit {
 
   //#region MAP
 
-  // Handler del evento del componente mapa onSelectedCoordinate
   selectedCoordinate(coordinate: Coordinate): void {
-    console.log(coordinate);
     this.emittedCoordinate = coordinate;
   }
 
@@ -113,18 +111,15 @@ export class UpsertCustomerComponent implements OnInit {
   isEdit(id: number) {
     if (id !== 0) {
       this.operation = "Editar ";
-      // Obtenemos el customer que vamos a editar
       this.getCustomer(id);    
     }
     else {
-      // Si estamos agregando mostramos el mapa centrado con las coordenadas de Lima y 
-      // sin marcador
       const coordinate: Coordinate= {
         latitude: "-12.061144802538239",
         longitude: "-77.03682766782327",
-        marker: false // Sin marcador
+        marker: false 
       };
-      // Colocamos las coordenadas en la variable input del mapa
+
       this.initialCoordinate.push(coordinate);
     }
   }
@@ -133,11 +128,10 @@ export class UpsertCustomerComponent implements OnInit {
     this.loading = true;
     this.customerService.getCustomer(id).subscribe({
       next: (customer) => {
-        console.log(customer);
         this.loading = false;
-        this.form.patchValue(customer); // Llenamos el form con los datos del customer a editar
-        this.setRating(customer); // Seteamos el rating 
-        this.setLocation(customer); // Seteamos la ubicacion en el mapa
+        this.form.patchValue(customer);
+        this.setRating(customer);
+        this.setLocation(customer);
       },
       error: (e: HttpErrorResponse) => {
         this.errorAction(e);
@@ -153,10 +147,7 @@ export class UpsertCustomerComponent implements OnInit {
 
   setRating(customer: Customer) {
     const { rating } = customer;
-    // Si el rating obtenido de BD es null o undefined, asignamos el valor 0 lo que significa que 
-    // ninguna estrella se pintara
     this.selectedRating = rating ?? 0;
-    // Mantenemos en memoria el rating previamente seleccionado
     this.previousRating = this.selectedRating;
   }
 
@@ -164,46 +155,32 @@ export class UpsertCustomerComponent implements OnInit {
     const { latitude, longitude } = customer;
     const res = latitude || false;
     
-    // Si existen coordenadas en BD para el customer
     if (res) {
-      console.log(res);
-      //Coordenadas para el mapa en modo edicion
       const coordinate: Coordinate= {
         latitude: latitude!,
         longitude: longitude!,
-        marker: true // Con marcador
+        marker: true
       };
 
-      // Colocamos la coordenada en la variable input del mapa
       this.initialCoordinate.push(coordinate);
-      // ejecutamos nuevamente el ngOnInit() del mapa para q se cree el mapa con la coordenada
-      // centrada y con el marker respectivo
+
       this.mapComponent.ngOnInit(); 
 
-      // Le doy a emittedCoordinate las coordenadas existentes por si el usuario no las modifica 
-      // en el mapa. Asi evito que emittedCoordinate quede en null y se pierdan las coordenadas
-      // existentes
       this.emittedCoordinate = coordinate;
     }
-    else { // Si no existen coordenadas en BD para el customer (null, undefined, "")
-      // Damos por defecto las coordenadas de Lima y sin marcador
+    else { 
       const coordinate: Coordinate= {
         latitude: "-12.061144802538239",
         longitude: "-77.03682766782327",
-        marker: false // Sin marcador
+        marker: false 
       };
-      // Colocamos la coordenada en la variable input del mapa
+
       this.initialCoordinate.push(coordinate);
-      // ejecutamos nuevamente el ngOnInit() del mapa para q se cree el mapa con la coordenada
-      // centrada y con el marker respectivo
       this.mapComponent.ngOnInit(); 
     }
   }
 
   addEditCustomer() {
-    /*console.log(this.form.value.firstName);
-    console.log(this.form.get("firstName")?.value);*/
-
     if (this.form.invalid) {
       return;
     }
@@ -212,9 +189,7 @@ export class UpsertCustomerComponent implements OnInit {
     customer.rating = this.selectedRating,
     customer.latitude = this.emittedCoordinate?.latitude ?? "",
     customer.longitude = this.emittedCoordinate?.longitude ?? ""
-    console.log(customer);
-    //   // Si hubiera algun problema con la fecha al momento de enviar a registro
-    //   dateOfBirth: this.form.value.dateOfBirth.toISOString().slice(0, 10), // 2020-03-18
+
     this.loading = true;
 
     if (this.idCustomer === 0) {
@@ -264,6 +239,4 @@ export class UpsertCustomerComponent implements OnInit {
       "Error"
     );
   }
-  
-
 }

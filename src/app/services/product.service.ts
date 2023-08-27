@@ -17,12 +17,6 @@ export class ProductService {
   }
 
   getProducts(): Observable<Product[]> {
-    // Agragando el token directamente en el servicio
-    // const token = localStorage.getItem("token");
-    // const headers = new HttpHeaders().set("Authorization", `Bearer ${token}`);
-    // return this.http.get<Product[]>(`${this.myAppUrl}${this.myApiEndppint}`, {headers: headers});
-
-    // Agregando el token en el intereceptor
     return this.http.get<Product[]>(`${this.myAppUrl}${this.myApiEndppint}`);
   }
 
