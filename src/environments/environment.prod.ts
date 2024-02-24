@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  server: "https://creditos-mean-api-production.up.railway.app/"
+  server: "https://creditos-mean-api-1.onrender.com/"
 };
